@@ -1,9 +1,25 @@
 /**
- * Calculate the average of an array of numbers.
+ * Calculate the average of numbers in an array.
  * @param {number[]} arr
  * @returns {number}
  */
 function calculateAverage(arr) {
+  if (arr === undefined) {
+    throw new Error('Array cannot be undefined');
+  }
+
+  if (!Array.isArray(arr)) {
+    throw new Error('Argument must be an array');
+  }
+
+  if (arr.length === 0) {
+    throw new Error('Array cannot be empty');
+  }
+
+  if (arr.some(item => typeof item !== 'number')) {
+    throw new Error('Array can only contain numbers');
+  }
+
   const total = arr.reduce((sum, number) => sum + number, 0);
   return total / arr.length;
 }
