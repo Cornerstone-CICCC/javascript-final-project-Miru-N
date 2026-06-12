@@ -1,21 +1,38 @@
 /**
- * Find the longest prefix shared by every string in an array.
+ * Find the longest common prefix in an array of strings.
  * @param {string[]} strings
  * @returns {string}
  */
 function findLongestCommonPrefix(strings) {
-  if (strings.length === 0) return '';
+  if (strings === undefined) {
+    throw new Error('Array cannot be undefined');
+  }
 
-  const firstString = strings[0];
-  const secondString = strings[1] ?? firstString;
-  let prefix = '';
+  if (!Array.isArray(strings)) {
+    throw new Error('Argument must be an array');
+  }
 
-  for (let index = 0; index < firstString.length; index += 1) {
-    if (firstString[index] !== secondString[index]) break;
-    prefix += firstString[index];
+  if (strings.some((item) => typeof item !== 'string')) {
+    throw new Error('Array can only contain strings');
+  }
+
+  if (strings.length === 0) {
+    return '';
+  }
+
+  let prefix = strings[0];
+
+  for (const word of strings) {
+    while (!word.startsWith(prefix)) {
+      prefix = prefix.slice(0, -1);
+
+      if (prefix === '') {
+        return '';
+      }
+    }
   }
 
   return prefix;
 }
 
-module.exports = findLongestCommonPrefix;
+module.exports = module.exports = findLongestCommonPrefix;
